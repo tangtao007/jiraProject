@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
 export const isFalsy = (value: any) => (value === 0 ? false : !value);
+
+// 另外一种TS写法
+// const isTsFalsy:(value:number)=>boolean = (value => {
+//   return false;
+// })
 export const cleanObject = (object: object) => {
   const result = { ...object };
   Object.keys(result).forEach((key) => {
@@ -37,7 +42,7 @@ export const useMount = (callback: () => void) => {
 // log({name:"1"});
 // log({name:"1"});
 
-export const useDebounce = (value: any, delay?: number) => {
+export const useDebounce = (value: unknown, delay?: number): any => {
   const [debounceValue, setDebounceValue] = useState(value);
 
   useEffect(() => {
