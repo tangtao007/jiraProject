@@ -23,6 +23,21 @@ export const useMount = (callback: () => void) => {
   }, []);
 };
 
+export const useArray = <T>(initialArray: T[]) => {
+  const [value, setValue] = useState(initialArray);
+  return {
+    add: (item: T) => setValue([...value, item]),
+    removeIndex: (index: number) => {
+      const copy = [...value];
+      copy.splice(index, 1);
+      setValue(copy);
+    },
+    clear: () => setValue([]),
+    value,
+    setValue,
+  };
+};
+
 // 延迟函数编写
 // const debounce = (func,delay) =>{
 //   let timeout;
@@ -42,7 +57,7 @@ export const useMount = (callback: () => void) => {
 // log({name:"1"});
 // log({name:"1"});
 
-export const useDebounce = (value: unknown, delay?: number): any => {
+export const useDebounce = <V>(value: V, delay?: number) => {
   const [debounceValue, setDebounceValue] = useState(value);
 
   useEffect(() => {
